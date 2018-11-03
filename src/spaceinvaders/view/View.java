@@ -2,10 +2,8 @@ package spaceinvaders.view;
 
 import javafx.application.Application;
 import javafx.event.Event;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -20,18 +18,8 @@ import java.util.Optional;
 
 public class View extends Application {
 
-    //private Scene mainMenu;
-    //private Scene playBoard;
 
     private String title;
-
-    @FXML
-    private Button start;
-    @FXML
-    private Button quit;
-    @FXML
-    private Button otpions;
-
 
     public View(){
         this("Space Invaders");
@@ -46,7 +34,7 @@ public class View extends Application {
     public void start(Stage primaryStage) throws Exception  {
         primaryStage.setTitle(title);
 
-        ViewLoader<BorderPane,Object> viewLoader =
+        ViewLoader<BorderPane,ControllerMenu> viewLoader =
                 new ViewLoader<>("spaceinvaders.Menu.fxml");
 
         BorderPane border = viewLoader.getLayout();
@@ -56,8 +44,12 @@ public class View extends Application {
 
         primaryStage.setOnCloseRequest(e -> closeRequest(e));
 
+        viewLoader.getFxmlController().setStage(primaryStage);
+
         primaryStage.show();
     }
+
+
 
     private void closeRequest(Event ev)
     {

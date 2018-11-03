@@ -1,7 +1,6 @@
 package spaceinvaders;
 
 import javafx.application.Application;
-import spaceinvaders.controller.Controller;
 import spaceinvaders.model.Model;
 import spaceinvaders.view.View;
 
@@ -23,18 +22,11 @@ public class SpaceInvaders {
 
     private static Model model;
     private static View view;
-    private static Controller control;
 
     public static void main(String[] args) {
         model = new Model();
-        control = new Controller();
-        try{
-            view = new View();
-        }
-        catch(Exception e)
-        {
+        view = new View();
 
-        }
         Application.launch(View.class, args); //launch View
     }
 }

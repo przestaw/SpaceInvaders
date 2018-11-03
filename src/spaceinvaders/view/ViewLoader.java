@@ -1,7 +1,6 @@
 package spaceinvaders.view;
 
 import javafx.fxml.FXMLLoader;
-import spaceinvaders.SpaceInvaders;
 
 import java.io.IOException;
 
