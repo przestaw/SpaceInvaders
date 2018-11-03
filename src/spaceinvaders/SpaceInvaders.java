@@ -28,7 +28,13 @@ public class SpaceInvaders {
     public static void main(String[] args) {
         model = new Model();
         control = new Controller();
-        view = new View();
+        try{
+            view = new View();
+        }
+        catch(Exception e)
+        {
+
+        }
         Application.launch(View.class, args); //launch View
     }
 }

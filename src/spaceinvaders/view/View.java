@@ -1,10 +1,16 @@
 package spaceinvaders.view;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 /**
  * View for spaceinvaders
@@ -14,35 +20,53 @@ import javafx.stage.Stage;
 
 public class View extends Application {
 
-    private Scene appScene;
+    //private Scene mainMenu;
+    //private Scene playBoard;
 
     private String title;
 
-    public View() {
+    @FXML
+    private Button start;
+    @FXML
+    private Button quit;
+    @FXML
+    private Button otpions;
+
+
+    public View(){
         this("Space Invaders");
     }
 
-    public View(String title) {
+    public View(String title){
         this.title = title;
+
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("spaceinvaders.view.fxml"));
+    public void start(Stage primaryStage) throws Exception  {
         primaryStage.setTitle(title);
-        primaryStage.setScene(new Scene(root, 500, 750));
+
+        ViewLoader<BorderPane,Object> viewLoader =
+                new ViewLoader<>("spaceinvaders.Menu.fxml");
+
+        BorderPane border = viewLoader.getLayout();
+        Scene mainMenu = new Scene(border);
+
+        primaryStage.setScene(mainMenu);
+
+        primaryStage.setOnCloseRequest(e -> closeRequest(e));
+
         primaryStage.show();
     }
 
-    @Override
-    public void init()
+    private void closeRequest(Event ev)
     {
-        Parameters param = getParameters();
-    }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to quit?", ButtonType.NO, ButtonType.YES);
+        Optional<ButtonType> result = alert.showAndWait();
 
-    @Override
-    public void stop()
-    {
-        //TODO - exit confrimation
+        if(result.orElse(ButtonType.NO) != ButtonType.YES){
+            ev.consume();
+        }
+
     }
 }
