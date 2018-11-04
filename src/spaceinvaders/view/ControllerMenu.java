@@ -3,35 +3,30 @@ package spaceinvaders.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import spaceinvaders.ViewLoader;
 
-public class ControllerMenu {
+public class ControllerMenu extends AbstractController{
 
 
     @FXML
-    private Button start;
+    private Button startBTN;
     @FXML
-    private Button quit;
+    private Button quitBTN;
     @FXML
-    private Button options;
+    private Button optionsBTN;
 
-    private Stage primaryStage;
-    private ViewLoader<BorderPane,Object> viewLoader;
-
-    public void setStage(Stage primaryStage)
-    {
-        this.primaryStage = primaryStage;
-    }
-
+    private ViewLoader<BorderPane,ControllerGame> viewLoader;
 
     @FXML
     private void initialize()
     {
-        quit.setOnAction(e -> {
+        quitBTN.setOnAction(e -> {
                     primaryStage.fireEvent(new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST));
                 }
         );
+
+        startBTN.setOnAction(e -> { application.runGame(); });
         //Runed automaticly after construction
     }
 }
