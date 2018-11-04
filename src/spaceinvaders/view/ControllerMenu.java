@@ -2,9 +2,8 @@ package spaceinvaders.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.WindowEvent;
-import spaceinvaders.ViewLoader;
+
 
 public class ControllerMenu extends AbstractController{
 
@@ -14,9 +13,7 @@ public class ControllerMenu extends AbstractController{
     @FXML
     private Button quitBTN;
     @FXML
-    private Button optionsBTN;
-
-    private ViewLoader<BorderPane,ControllerGame> viewLoader;
+    private Button steeringBTN;
 
     @FXML
     private void initialize()
@@ -27,6 +24,8 @@ public class ControllerMenu extends AbstractController{
         );
 
         startBTN.setOnAction(e -> { application.runGame(); });
+
+        steeringBTN.setOnAction(e -> { application.runSteering(); });
         //Runed automaticly after construction
     }
 }
