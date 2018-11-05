@@ -1,34 +1,28 @@
-package spaceinvaders.view;
+package spaceinvaders.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+
 /**
- * Controller Class for Game screen
+ * Controller Class for Steering screen
  */
-public class ControllerGame extends AbstractController{
+public class ControllerSteering extends AbstractController {
 	
 	/**
 	 * Variables connected with FXML defined in *.FXML file
 	 */
     @FXML
-    private Button resetBTN;
-    @FXML
-    private Label scoreLBL;
-    @FXML
     private Button returnBTN;
+    @FXML
+    private Button startBTN;
 	/**
 	 * Method run automatically after construction. Defines Action using lambdas.
 	 */
     @FXML
     private void initialize()
     {
-        resetBTN.setOnAction(e -> { /*... */});
-
         returnBTN.setOnAction(e -> { application.runMenu(); });
-
+        startBTN.setOnAction(e -> { application.runGame(); });
+        //Runed automaticly after construction
     }
-
-
-    //TODO - controller of game logic
 }

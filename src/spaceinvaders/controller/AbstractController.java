@@ -1,7 +1,7 @@
-package spaceinvaders.view;
+package spaceinvaders.controller;
 
 import javafx.stage.Stage;
-import spaceinvaders.SpaceInvaders;
+import spaceinvaders.view.SpaceInvaders;
 
 /**
  * Abstract Class to unify shared interface of controllers for FXML scenes

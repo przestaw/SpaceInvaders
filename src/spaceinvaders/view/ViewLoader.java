@@ -1,4 +1,4 @@
-package spaceinvaders;
+package spaceinvaders.view;
 
 import javafx.fxml.FXMLLoader;
 
@@ -14,7 +14,7 @@ public class ViewLoader<T,U> {
 
 	/**
 	 * Class constructor
-	 * @param path to FXML file
+	 * @param fxml - path to FXML file
 	 */
     public ViewLoader(String fxml)
     {

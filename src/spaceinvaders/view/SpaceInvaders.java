@@ -1,4 +1,4 @@
-package spaceinvaders;
+package spaceinvaders.view;
 
 import javafx.application.Application;
 import javafx.event.Event;
@@ -6,9 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import spaceinvaders.model.Model;
-import spaceinvaders.view.AbstractController;
-import spaceinvaders.view.QuitAlert;
+import spaceinvaders.controller.AbstractController;
 
 import java.util.Optional;
 
@@ -17,13 +15,12 @@ import java.util.Optional;
  * This is main class.
  *
  * @author przestaw
- * @version 0.0.1-alpha
+ * @version 0.0.2-alpha
  * @since 2018-11-2
  */
 
 public class SpaceInvaders extends Application {
-
-    private static Model model;
+    private static String path;
 
     private Scene menu;
     private Scene game;
@@ -31,8 +28,27 @@ public class SpaceInvaders extends Application {
 
     private Stage myStage;
 
-    public static void main(String[] args) {
+    public SpaceInvaders()
+    {
+        path = "FXML/W800/";
+    }
 
+    public SpaceInvaders(int size)
+    {
+        switch (size) {
+            case 1:
+                path = "FXML/W400/";
+                break;
+            case 3:
+                path = "FXML/W1200/";
+                break;
+            default:
+                path = "FXML/W800/";
+                break;
+        }
+    }
+
+    public void begin(String[] args) {
         launch(args);
     }
 
@@ -63,7 +79,7 @@ public class SpaceInvaders extends Application {
     {
         //Load menu
         ViewLoader<BorderPane, AbstractController> menuLoader =
-                new ViewLoader<>("view/view.Menu.fxml");
+                new ViewLoader<>(path+"view.Menu.fxml");
 
         BorderPane menuBorder = menuLoader.getLayout();
         menu = new Scene(menuBorder);
@@ -75,7 +91,7 @@ public class SpaceInvaders extends Application {
     {
         //Load game
         ViewLoader<BorderPane, AbstractController> gameLoader =
-                new ViewLoader<>("view/view.Game.fxml");
+                new ViewLoader<>(path+"view.Game.fxml");
 
         BorderPane gameBorder = gameLoader.getLayout();
         game = new Scene(gameBorder);
@@ -87,7 +103,7 @@ public class SpaceInvaders extends Application {
     {
         //Load menu
         ViewLoader<BorderPane, AbstractController> Loader =
-                new ViewLoader<>("view/view.Steering.fxml");
+                new ViewLoader<>(path+"view.Steering.fxml");
 
         BorderPane Border = Loader.getLayout();
         steering = new Scene(Border);

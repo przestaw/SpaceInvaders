@@ -1,4 +1,4 @@
-package spaceinvaders.view;
+package spaceinvaders.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +7,7 @@ import javafx.stage.WindowEvent;
 /**
  * Controller Class for Main Menu screen
  */
-public class ControllerMenu extends AbstractController{
+public class ControllerMenu extends AbstractController {
 	
 	/**
 	 * Variables connected with FXML defined in *.FXML file
