@@ -12,9 +12,9 @@ public abstract class AbstractController {
 	protected Stage primaryStage;
 
     protected SpaceInvaders application;
-    /* Deprecated
+/*
     protected Scene myScene;
-    */
+*/
 	/**
 	 * Setter for variable primaryStage
 	 * @param primaryStage
@@ -31,20 +31,20 @@ public abstract class AbstractController {
     }
 	/**
 	 * Setter for variable application
-	 * @param application
+	 * @param application ViewClass
 	 */
     public void setApplication(SpaceInvaders application) {
         this.application = application;
     }
 	/**
 	 * Getter for variable application
-	 * @return application
+	 * @return ViewClass
 	 */
     public SpaceInvaders getApplication() {
         return application;
     }
 
-    /* Deprecated
+/*
     public void setMyScene(Scene myScene) {
         this.myScene = myScene;
     }
@@ -52,5 +52,5 @@ public abstract class AbstractController {
     public Scene getMyScene() {
         return myScene;
     }
-    */
+*/
 }

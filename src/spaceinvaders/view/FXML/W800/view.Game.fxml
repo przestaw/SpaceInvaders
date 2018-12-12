@@ -5,9 +5,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.controller.ControllerGame">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" onKeyPressed="#keyOnActionHandler" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.controller.ControllerGame">
    <center>
-      <Canvas height="550.0" width="800.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="gameCanvas" height="550.0" width="800.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
@@ -17,7 +17,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="returnBTN" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Return to Menu" AnchorPane.rightAnchor="50.0">
+            <Button fx:id="returnBTN" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Main Menu" AnchorPane.rightAnchor="50.0">
                <font>
                   <Font size="24.0" />
                </font>

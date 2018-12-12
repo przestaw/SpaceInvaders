@@ -3,11 +3,12 @@ package spaceinvaders.model;
  * Class used to store and modify whole game state
  */
 
-public class GameBoard {
+public abstract class GameBoard {
+
     private int score;
 
-    private static int sizeX;
-    private static int sizeY;
+    protected final int sizeX;
+    protected final int sizeY;
 
     private boolean play;
     private boolean gameover;
@@ -62,6 +63,13 @@ public class GameBoard {
 	 */
     public boolean isWon() {
         return won;
+    }
+    /**
+     * Setter for variable score
+     * @param score new score value
+     */
+    public void setScore(int score) {
+        this.score = score;
     }
 	/**
 	 * Method used to set the game state to gameover

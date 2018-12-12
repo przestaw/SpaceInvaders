@@ -10,6 +10,32 @@ public abstract class GameObject {
 
     private int posX;
     private int posY;
+
+	private boolean alive;
+
+	/**
+	 * Method checking if Object is alive
+	 * @return alive bool
+	 */
+	public boolean isAlive() {
+		return alive;
+	}
+
+	/**
+	 * Setter that makes Object Dead
+	 */
+	public void setDead() {
+		this.alive = false;
+	}
+
+
+	/**
+	 * Setter that makes Object Alive
+	 */
+	public void setAlive() {
+		this.alive = true;
+	}
+
 	/**
 	 * Type uset to specify the direction GameObject is looking at
 	 */
@@ -28,6 +54,8 @@ public abstract class GameObject {
 
         this.sizeX = 1;
         this.sizeY = 1;
+
+        this.alive = true;
     }
 	/**
 	 * Class constructor
@@ -43,6 +71,8 @@ public abstract class GameObject {
 
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+
+        this.alive = true;
     }
 	/** Getter for position on X axis
 	 * @return position on X axis
@@ -74,7 +104,7 @@ public abstract class GameObject {
     }
 	/**
 	 * Setter for position on X axis
-	 * @param position on X axis
+	 * @param posX position on X axis
 	 */
     public void setPosX(int posX)
     {
@@ -83,7 +113,7 @@ public abstract class GameObject {
     }
 	/**
 	 * Setter for position on Y axis
-	 * @param position on Y axis
+	 * @param posY position on Y axis
 	 */
     public void setPosY(int posY)
     {
@@ -91,7 +121,7 @@ public abstract class GameObject {
             this.posY = posY;
     }
 	/** Setter for width of object
-	 * @param width of object
+	 * @param sizeX width of object
 	 */
     public void setSizeX(int sizeX)
     {
@@ -99,7 +129,7 @@ public abstract class GameObject {
             this.sizeX = sizeX;
     }
 	/** Setter for height of object
-	 * @param height of object
+	 * @param sizeY height of object
 	 */
     public void setSizeY(int sizeY)
     {
@@ -108,7 +138,7 @@ public abstract class GameObject {
     }
 	/**
 	 * Method used to move object in X axis
-	 * @param how many steps in direction of X axis
+	 * @param X how many steps in direction of X axis
 	 * @return position on X axis
 	 */
     public int modifyPosX(int X)
@@ -118,7 +148,7 @@ public abstract class GameObject {
     }
 	/**
 	 * Method used to move object in Y axis
-	 * @param how many steps in direction of Y axis
+	 * @param Y how many steps in direction of Y axis
 	 * @return position on Y axis
 	 */
     public int modifyPosY(int Y)
@@ -128,8 +158,8 @@ public abstract class GameObject {
     }
 	/**
 	 * Method used to modify object size in Y axis
-	 * @param how many units in direction of Y axis
-	 * @return size on Y axis or -1 if size would be less than 0
+	 * @param X how many units in direction of X axis
+	 * @return size on X axis or -1 if size would be less than 0
 	 */
     public int modifySizeX(int X)
     {
@@ -145,7 +175,7 @@ public abstract class GameObject {
 
     /**
 	 * Method used to modify object size in Y axis
-	 * @param how many units in direction of Y axis
+	 * @param Y how many units in direction of Y axis
 	 * @return size on Y axis or -1 if size would be less than 0
 	 */
     public int modifySizeY(int Y)

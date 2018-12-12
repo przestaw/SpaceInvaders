@@ -3,10 +3,18 @@ package spaceinvaders.view;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import spaceinvaders.controller.AbstractController;
+import spaceinvaders.controller.ControllerGame;
+import spaceinvaders.model.Bullet;
+import spaceinvaders.model.Enemy;
+import spaceinvaders.model.Player;
+import spaceinvaders.model.SpaceGame;
 
 import java.util.Optional;
 
@@ -28,21 +36,33 @@ public class SpaceInvaders extends Application {
 
     private Stage myStage;
 
-    public SpaceInvaders()
+    private SpaceGame myGame;
+
+    public SpaceInvaders() //I don't know why and where but it's used
     {
+        this.myGame = new SpaceGame(800,550);
         path = "FXML/W800/";
+    }
+
+    public SpaceGame getMyGame(){
+        return myGame;
     }
 
     public SpaceInvaders(int size)
     {
+        this.myGame = new SpaceGame(800,550);
+
         switch (size) {
             case 1:
+                this.myGame = new SpaceGame(400,275);
                 path = "FXML/W400/";
                 break;
             case 3:
+                this.myGame = new SpaceGame(1200,825);
                 path = "FXML/W1200/";
                 break;
             default:
+                this.myGame = new SpaceGame(800,550);
                 path = "FXML/W800/";
                 break;
         }
@@ -90,13 +110,14 @@ public class SpaceInvaders extends Application {
     private void loadGame()
     {
         //Load game
-        ViewLoader<BorderPane, AbstractController> gameLoader =
+        ViewLoader<BorderPane, ControllerGame> gameLoader =
                 new ViewLoader<>(path+"view.Game.fxml");
 
         BorderPane gameBorder = gameLoader.getLayout();
         game = new Scene(gameBorder);
         gameLoader.getFxmlController().setStage(myStage);
         gameLoader.getFxmlController().setApplication(this);
+        gameLoader.getFxmlController().start();     //this could be only temporary TODO: remove
     }
 
     private void loadSteernig()
@@ -109,6 +130,7 @@ public class SpaceInvaders extends Application {
         steering = new Scene(Border);
         Loader.getFxmlController().setStage(myStage);
         Loader.getFxmlController().setApplication(this);
+
     }
     public void runGame()
     {
@@ -123,5 +145,39 @@ public class SpaceInvaders extends Application {
     public void runSteering()
     {
         myStage.setScene(steering);
+    }
+
+    public void redrawGame(Canvas canvas) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        //redrawPlayer(gc, myGame.getPlayer()); //TODO -> error
+        gc.setFill(Color.BLUE);
+        gc.fillRect(100,100,100,100);
+    }
+
+    private void redrawEnemy(GraphicsContext gc, Enemy enemy)
+    {
+        gc.setStroke(Color.BLUE);
+        gc.strokeRoundRect(enemy.getPosX(), enemy.getPosY(), enemy.getSizeX(), enemy.getSizeY(), 15, 15);
+    }
+
+    private void redrawPlayer(GraphicsContext gc, Player player)
+    {
+        double x,y,sizeX,sizeY;
+        gc.setStroke(Color.GREENYELLOW);
+        gc.fillRect(100, 100, 100,100);
+        sizeX = player.getSizeX();
+        sizeY = player.getSizeY();
+        x = player.getPosX();
+        y = player.getPosY();
+
+        gc.strokePolyline(  new double[]{x, x, x-sizeX/2, x+sizeX/2},
+                new double[]{y+sizeY, y, y, y },
+                4);
+    }
+
+    private void redrawBullet(GraphicsContext gc, Bullet bullet)
+    {
+        gc.setFill(Color.RED);
+        gc.fillRoundRect(bullet.getPosX(), bullet.getPosY(), bullet.getSizeX(), bullet.getSizeY(), 15, 15);
     }
 }
