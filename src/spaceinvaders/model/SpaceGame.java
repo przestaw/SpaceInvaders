@@ -1,44 +1,42 @@
 package spaceinvaders.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.function.Predicate;
 
 public class SpaceGame extends GameBoard {
 
     private Enemy[] enemyArray; //12x5
     private Player player;
-    private List<Bullet> bullets;
+    private ArrayList<Bullet> bullets;
 
-    private int moveCount;
+    private int movEnemy;
+    private long movCount;
     /**
      * Class Constructor
      * @param sizeX - height
      * @param sizeY - width
      */
-    public SpaceGame(int sizeX, int sizeY)
-    {
+    public SpaceGame(int sizeX, int sizeY) {
         super(sizeX, sizeY);
-        moveCount = 0;
         player = new Player(sizeX, sizeY);
-        enemyArray= new Enemy[60];
+        enemyArray= new Enemy[40];
         createEnemy();
+        bullets = new ArrayList<Bullet>();
+        movEnemy = 0;
     }
 
-    public void restart()
-    {
+    public void restart() {
         super.start();
         createEnemy();
         resetPlayer();
         super.setScore(0);
-        moveCount = 0;
     }
 
     @Override
-    public void gameover()
-    {
+    public void gameover() {
         super.gameover();
         player.setDead();
+        movCount = 0;
     }
 
     public void scoreUp()
@@ -46,43 +44,37 @@ public class SpaceGame extends GameBoard {
         super.setScore(super.getScore() + 5);
     }
 
-    private void resetPlayer()
-    {
+    private void resetPlayer() {
         player.setAlive();
         player.setPosX(sizeX*11/24);
         player.setSizeX(sizeY/24);
     }
 
-    private void createEnemy()
-    {
-        for(int i = 0; i < 12; ++i)
-        {
-            enemyArray[i] = new Enemy(sizeX/24, i*sizeX/12, sizeY/2);
+    private void createEnemy() {
+        for(int j = 0; j < 4; ++j) {
+            for(int i = 0; i < 10; ++i) {
+                enemyArray[i+j*10] = new Enemy(sizeX/30, (i+1)*sizeX/14, (1+j)*sizeY/14);
+            }
         }
     }
 
-    public Enemy[] getEnemy()
-    {
-        return enemyArray;
+    public Enemy getEnemy(int i) {
+        return enemyArray[i];
     }
 
-    public Iterator<Bullet> getBulletList()
-    {
+    public Iterator<Bullet> getBulletList(){
         return bullets.iterator();
     }
 
-    public void update()
-    {
+    public void update() {
         //Check if anybody is dead
         for (Bullet bullet: bullets) {
             bullet.move();
-            switch(bullet.getOrigin())
-            {
+            switch(bullet.getOrigin()) {
                 case PLAYER:
                     for (Enemy enemy: enemyArray) {
                         if(enemy.isAlive()
-                                && enemy.getPosX() == bullet.getPosX()
-                                && enemy.getPosY() == bullet.getSizeY()
+                               && isInRange(bullet, enemy)
                            )
                         {
                             enemy.setDead();
@@ -92,11 +84,12 @@ public class SpaceGame extends GameBoard {
                     }
                     break;
                 case ENEMY:
-                    if(player.getPosX() == bullet.getPosX() && player.getPosY() == bullet.getSizeY())
-                    {
+                    if(isInRange(bullet, player)) {
                         player.setDead();
-                        bullet.setDead();
-                        this.gameover();
+                        this.pause();
+                        //bullet.setDead();
+                        //this.gameover();
+                        System.out.println("Gameover");
                     }
                     break;
             }
@@ -104,35 +97,21 @@ public class SpaceGame extends GameBoard {
         //TODO :: make out of range bullets dead in ^ cond above ^
 
         //Enemy shoots
-        for (Enemy enemy: enemyArray) {
-            if(moveCount%2 == 1 && Math.random() < 0.3)
-            {
-                bullets.add(enemy.shoot());
+        for (int i = 0; i < 8; ++i){
+            if(movCount%(enemyArray.length / 2) == 0 && Math.random() < 0.1) {
+                bullets.add(enemyArray[i].shoot());
             }
         }
         //Enemy moves
-        if(moveCount < 0)
+        if(movCount%enemyArray.length == 0)
         {
-            for (Enemy enemy: enemyArray) {
-                enemy.moveRight();
+            for (Enemy enemy:enemyArray) {
+                enemy.move();
             }
-        }else if(moveCount == 0)
-        {
-            for (Enemy enemy: enemyArray) {
-                enemy.moveDown();
-            }
-        }else if(moveCount < 12)
-        {
-            for (Enemy enemy: enemyArray) {
-                enemy.moveDown();
-            }
-        }else
-        {
-            for (Enemy enemy: enemyArray) {
-                enemy.moveDown();
-            }
-            moveCount = -11;
         }
+
+        movCount++;
+
         /*
         for(Iterator<Bullet> iter = bullets.iterator(); iter.hasNext();)
         {
@@ -144,15 +123,30 @@ public class SpaceGame extends GameBoard {
         }
         */
         //Remove used bullets
-        Predicate<Bullet> deadBullet = b -> !(b.isAlive());
-        bullets.removeIf(deadBullet);
+        bullets.removeIf((Bullet b) -> !(b.isAlive()));
+
     }
 
-    public int getPlayerX() {
-        return player.getPosX();
+    private void moveEnemies() {
+
     }
 
-    public int getPlayerY() {
-        return player.getPosY();
+    public Player getPlayer(){
+        return player;
+    }
+
+    public void playerShoot() {
+        bullets.add(player.shoot());
+    }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+
+    private boolean isInRange(GameObject one, GameObject two) {
+        return((  (one.getPosX() < two.getPosX()+two.getSizeX()/2)
+                &&(one.getPosX() > two.getPosX()-two.getSizeX()/2))
+               &&((one.getPosY() < two.getPosY()+two.getSizeY()/2)
+                &&(one.getPosY() > two.getPosX()-two.getSizeY()/2)));
     }
 }

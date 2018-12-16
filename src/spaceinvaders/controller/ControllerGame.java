@@ -27,6 +27,7 @@ public class ControllerGame extends AbstractController {
 
     private SpaceGame myGame;
     private AnimationTimer timer;
+    private long last_update;
 
     @FXML
     private void keyOnActionHandler(KeyEvent key)
@@ -34,13 +35,24 @@ public class ControllerGame extends AbstractController {
         switch (key.getCode())
         {
             case A :
-                System.out.println("LEFT");
+                if(myGame.isPlay()) {
+                    myGame.getPlayer().moveLeft();
+                }
+                application.redrawGame(gameCanvas);
                 break;
             case D :
-                System.out.println("RIGHT");
+                if(myGame.isPlay()) {
+                    myGame.getPlayer().moveRight();
+                }
+                application.redrawGame(gameCanvas);
                 break;
             case W :
-                System.out.println("FIRE");
+                if(myGame.isPlay()) {
+                    myGame.playerShoot();
+                }
+                break;
+            case Q:
+                myGame.pause();
                 break;
             default:
                 break;
@@ -52,27 +64,36 @@ public class ControllerGame extends AbstractController {
     @FXML
     private void initialize()
     {
-        resetBTN.setOnAction(e -> { /*... */});
+        resetBTN.setOnAction(e -> { myGame.restart(); });
 
         returnBTN.setOnAction(e -> { application.runMenu(); });
-
-        timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                //MyGame.update();
-                application.redrawGame(gameCanvas);
+        last_update = 0;
+        timer = new AnimationTimer(){
+            public void handle(long now){
+                if(now - last_update >= 1000000)
+                {
+                    if(myGame.isPlay()) {
+                        myGame.update();
+                    }
+                    application.redrawGame(gameCanvas);
+                    last_update = now;
+                }
             }
         };
+    }
 
-       timer.start();
+    public void setMyGame(SpaceGame game)
+    {
+        myGame = game;
+    }
 
-
-
+    public Canvas getGameCanvas()
+    {
+        return gameCanvas;
     }
 
     public void start()
     {
         timer.start();
     }
-    //TODO - controller of game logic
 }

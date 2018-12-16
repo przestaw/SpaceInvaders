@@ -89,7 +89,7 @@ public abstract class GameBoard {
 	 * Method used to set the game state to pause
 	 */
     public void pause() {
-        play = false;
+        play = !play;
     }
 
 }

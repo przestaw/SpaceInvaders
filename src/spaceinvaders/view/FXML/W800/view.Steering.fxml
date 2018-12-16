@@ -5,16 +5,16 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.controller.ControllerSteering">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000020" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.controller.ControllerSteering">
    <top>
       <AnchorPane BorderPane.alignment="TOP_RIGHT">
          <children>
-             <Button fx:id="returnBTN" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Return to Menu" AnchorPane.rightAnchor="50.0">
+             <Button fx:id="returnBTN" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: DARKRED;" text="Return to Menu" textFill="WHITE" AnchorPane.rightAnchor="50.0">
                  <font>
                      <Font size="24.0" />
                  </font>
              </Button>
-            <Button fx:id="startBTN" layoutX="51.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Start Game" AnchorPane.leftAnchor="50.0">
+            <Button fx:id="startBTN" layoutX="51.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: DARKRED;" text="Start Game" textFill="WHITE" AnchorPane.leftAnchor="50.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -25,65 +25,62 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="372.0" layoutY="231.0" stroke="BLACK" strokeType="INSIDE" width="80.0">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="372.0" layoutY="231.0" stroke="WHITE" strokeType="INSIDE" width="80.0">
                <fill>
-                  <LinearGradient endX="0.7904761904761904" endY="0.10952380952380952" startX="0.3952380952380953" startY="1.0">
+                  <LinearGradient endX="0.8866300366300366" endY="0.25856227106227103" startX="0.1644688644688645" startY="1.0">
                      <stops>
-                        <Stop color="MAGENTA" />
-                        <Stop color="MAGENTA" offset="0.007662835249042145" />
-                        <Stop color="#c800ff" offset="0.007662835249042145" />
-                        <Stop color="BLUE" offset="1.0" />
+                        <Stop color="#8000ff" offset="0.1962962962962963" />
+                        <Stop color="#ff007c" offset="0.48888888888888893" />
+                        <Stop color="RED" offset="0.8592592592592593" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="60.0" layoutX="140.0" layoutY="212.0" stroke="WHITE" strokeType="INSIDE" width="60.0">
+               <fill>
+                  <LinearGradient endX="1.0" startY="1.0">
+                     <stops>
+                        <Stop color="#ffed00" offset="0.04259259259259259" />
+                        <Stop color="RED" offset="1.0" />
                      </stops>
                   </LinearGradient>
                </fill></Rectangle>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="60.0" layoutX="262.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="60.0">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="60.0" layoutX="615.0" layoutY="212.0" stroke="WHITE" strokeType="INSIDE" width="60.0">
                <fill>
-                  <LinearGradient endX="1.0" endY="0.2523809523809524" startX="0.5428571428571429" startY="0.4952380952380952">
+                  <LinearGradient endX="1.0" startY="1.0">
                      <stops>
-                        <Stop color="MAGENTA" />
-                        <Stop color="MAGENTA" offset="0.007662835249042145" />
-                        <Stop color="#c800ff" offset="0.007662835249042145" />
-                        <Stop color="BLUE" offset="1.0" />
+                        <Stop color="RED" offset="0.04259259259259259" />
+                        <Stop color="#ffed00" offset="1.0" />
                      </stops>
                   </LinearGradient>
-               </fill></Rectangle>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="60.0" layoutX="502.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="60.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="0.2523809523809524" startX="0.5428571428571429" startY="0.4952380952380952">
-                     <stops>
-                        <Stop color="MAGENTA" />
-                        <Stop color="MAGENTA" offset="0.007662835249042145" />
-                        <Stop color="#c800ff" offset="0.007662835249042145" />
-                        <Stop color="BLUE" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </fill></Rectangle>
-            <Text layoutX="387.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="W">
+               </fill>
+            </Rectangle>
+            <Text fill="WHITE" layoutX="387.0" layoutY="288.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="W">
                <font>
                   <Font size="50.0" />
                </font>
             </Text>
-            <Text layoutX="388.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fire">
+            <Text fill="WHITE" layoutX="378.0" layoutY="344.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fire">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="105.0" layoutY="304.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Move Left">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text layoutX="227.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move Left">
+            <Text fill="WHITE" layoutX="577.0" layoutY="303.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Move Right">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text layoutX="464.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move Right">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text layoutX="277.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
+            <Text fill="WHITE" layoutX="155.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
                <font>
                   <Font size="45.0" />
                </font>
             </Text>
-            <Text layoutX="515.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+            <Text fill="WHITE" layoutX="628.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
                <font>
                   <Font size="45.0" />
                </font>

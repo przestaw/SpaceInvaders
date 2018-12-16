@@ -8,7 +8,7 @@ public class Bullet extends GameObject
 
     public Bullet(int size, int posX, int posY, Origin origin)
     {
-        super(posX, posY);
+        super(posX, posY, size/3, size);
         this.origin = origin;
         move();
     }

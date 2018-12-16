@@ -5,35 +5,40 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.controller.ControllerMenu">
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-             <Button fx:id="startBTN" contentDisplay="CENTER" maxHeight="150.0" maxWidth="500.0" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" text="Start Game" textAlignment="JUSTIFY">
-                 <font>
-                     <Font size="48.0" />
-                 </font>
-             </Button>
-             <Button fx:id="steeringBTN" maxHeight="150.0" maxWidth="500.0" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" text="Steering" textAlignment="JUSTIFY">
-                 <font>
-                     <Font size="48.0" />
-                 </font></Button>
-             <Button fx:id="quitBTN" maxHeight="150.0" maxWidth="500.0" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" text="Quit" textAlignment="JUSTIFY">
-                 <font>
-                     <Font size="48.0" />
-                 </font>
-             </Button>
-         </children>
-      </VBox>
-   </center>
-   <top>
-       <Label contentDisplay="CENTER" maxHeight="-Infinity" prefHeight="100.0" text="Space Invaders" textAlignment="CENTER" BorderPane.alignment="BOTTOM_CENTER">
-           <font>
-               <Font size="48.0" />
-           </font>
-         <BorderPane.margin>
-            <Insets bottom="50.0" />
-         </BorderPane.margin>
-       </Label>
-   </top>
-</BorderPane>
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.controller.ControllerMenu">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="800.0" style="-fx-background-color: #000020;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <center>
+              <VBox alignment="TOP_CENTER" fillWidth="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-spacing: 65;" BorderPane.alignment="CENTER">
+                  <children>
+                      <Button fx:id="startBTN" contentDisplay="CENTER" maxHeight="150.0" maxWidth="-Infinity" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="540.0" style="-fx-alignment: CENTER; -fx-background-color: DARKRED;" text="Start Game" textAlignment="JUSTIFY" textFill="WHITE">
+                          <font>
+                              <Font size="48.0" />
+                          </font>
+                      </Button>
+                      <Button fx:id="steeringBTN" maxHeight="150.0" maxWidth="-Infinity" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="500.0" style="-fx-background-color: DARKRED; -fx-alignment: CENTER;" text="Steering" textAlignment="JUSTIFY" textFill="WHITE">
+                          <font>
+                              <Font size="48.0" />
+                          </font>
+                  </Button>
+                      <Button fx:id="quitBTN" maxHeight="150.0" maxWidth="500.0" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="480.0" style="-fx-background-color: DARKRED; -fx-alignment: CENTER;" text="Quit" textAlignment="JUSTIFY" textFill="WHITE">
+                          <font>
+                              <Font size="48.0" />
+                          </font>
+                      </Button>
+                  </children>
+              </VBox>
+          </center>
+          <top>
+              <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" prefHeight="100.0" text="Space Invaders" textAlignment="CENTER" textFill="#f00000" BorderPane.alignment="BOTTOM_CENTER">
+                  <font>
+                      <Font size="72.0" />
+                  </font>
+                  <BorderPane.margin>
+                      <Insets bottom="80.0" top="50.0" />
+                  </BorderPane.margin>
+              </Label>
+          </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
