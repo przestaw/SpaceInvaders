@@ -3,6 +3,8 @@ package spaceinvaders.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+//TODO : Make Player move methods to avoid going out of range xd
+
 public class SpaceGame extends GameBoard {
 
     private Enemy[] enemyArray; //12x5
@@ -109,7 +111,6 @@ public class SpaceGame extends GameBoard {
                 enemy.move();
             }
         }
-
         movCount++;
 
         /*
@@ -147,6 +148,6 @@ public class SpaceGame extends GameBoard {
         return((  (one.getPosX() < two.getPosX()+two.getSizeX()/2)
                 &&(one.getPosX() > two.getPosX()-two.getSizeX()/2))
                &&((one.getPosY() < two.getPosY()+two.getSizeY()/2)
-                &&(one.getPosY() > two.getPosX()-two.getSizeY()/2)));
+                &&(one.getPosY() > two.getPosY()-two.getSizeY()/2)));
     }
 }

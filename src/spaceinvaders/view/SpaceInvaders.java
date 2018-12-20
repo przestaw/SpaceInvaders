@@ -194,6 +194,6 @@ public class SpaceInvaders extends Application {
     private void redrawBullet(GraphicsContext gc, GameObject bullet)
     {
         gc.setFill(Color.DARKRED);
-        gc.fillRoundRect(bullet.getPosX()-bullet.getSizeX()/2.0, bullet.getPosY()+bullet.getSizeY()/2.0, bullet.getSizeX(), bullet.getSizeY(), 15, 15);
+        gc.fillRoundRect(bullet.getPosX()-bullet.getSizeX()/2.0, bullet.getPosY()+bullet.getSizeY()/2.0, bullet.getSizeX()*5.0, bullet.getSizeY()*5.0, 15, 15);
     }
 }
