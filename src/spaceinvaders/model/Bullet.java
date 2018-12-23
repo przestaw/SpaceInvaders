@@ -10,24 +10,19 @@ public class Bullet extends GameObject
     {
         super(posX, posY, size/2, size);
         this.origin = origin;
+        switch(origin){
+            case ENEMY:
+                super.setDirection(Direction.down);
+                break;
+            case PLAYER:
+                super.setDirection(Direction.up);
+                break;
+        }
         move();
     }
 
     public Origin getOrigin()
     {
         return origin;
-    }
-
-    public void move()
-    {
-        switch(origin)
-        {
-            case PLAYER:
-                super.modifyPosY(-1);
-                break;
-            case ENEMY:
-                super.modifyPosY(1);
-                break;
-        }
     }
 }

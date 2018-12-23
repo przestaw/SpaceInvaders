@@ -7,8 +7,8 @@ public abstract class GameBoard {
 
     private int score;
 
-    protected final int sizeX;
-    protected final int sizeY;
+    private final int sizeX;
+    private final int sizeY;
 
     private boolean play;
     private boolean gameover;
@@ -89,7 +89,14 @@ public abstract class GameBoard {
 	 * Method used to set the game state to pause
 	 */
     public void pause() {
-        play = !play;
+        play = false;
+    }
+    /**
+     * Method used to set the game state to play
+     */
+    public void unPause() {
+        if(!gameover)
+            play = true;
     }
 
 }

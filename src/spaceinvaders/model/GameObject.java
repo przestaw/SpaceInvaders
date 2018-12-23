@@ -14,33 +14,10 @@ public abstract class GameObject {
 	private boolean alive;
 
 	/**
-	 * Method checking if Object is alive
-	 * @return alive bool
-	 */
-	public boolean isAlive() {
-		return alive;
-	}
-
-	/**
-	 * Setter that makes Object Dead
-	 */
-	public void setDead() {
-		this.alive = false;
-	}
-
-
-	/**
-	 * Setter that makes Object Alive
-	 */
-	public void setAlive() {
-		this.alive = true;
-	}
-
-	/**
 	 * Type uset to specify the direction GameObject is looking at
 	 */
-    public enum Direction{up, down, left, right};
-	
+	public enum Direction{up, down, left, right, none, upRight, upLeft, downRight, downLeft};
+	private Direction direction;
 	/**
 	 * Class constructor
 	 * Assumes that size of object is 1 by 1
@@ -55,6 +32,7 @@ public abstract class GameObject {
         this.sizeX = 1;
         this.sizeY = 1;
 
+        this.direction = Direction.none;
         this.alive = true;
     }
 	/**
@@ -72,8 +50,68 @@ public abstract class GameObject {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
 
+		this.direction = Direction.none;
         this.alive = true;
     }
+
+	/**
+	 * Method used to move object on each game refresh
+	 * @param steps
+	 */
+	void move(int steps){
+		switch (direction){
+			case up:
+				posY = posY - steps;
+				break;
+			case down:
+				posY = posY + steps;
+				break;
+			case left:
+				posX = posX - steps;
+				break;
+			case right:
+				posX = posX + steps;
+				break;
+			case upLeft:
+				posX = posX- steps;
+				posY = posY - steps;
+				break;
+			case upRight:
+				posX = posX + steps;
+				posY = posY - steps;
+				break;
+			case downLeft:
+				posX = posX - steps;
+				posY = posY + steps;
+				break;
+			case downRight:
+				posX = posX + steps;
+				posY = posY + steps;
+				break;
+			case none:
+			default:
+				break;
+		}
+	}
+	/**
+	 * Method used to move object on each game refresh
+	 */
+	void move(){
+		this.move(1);
+	}
+	/** Getter for variable direction
+	 * @return direction the object is pointing at
+	 */
+	public Direction getDirection() {
+		return direction;
+	}
+
+	/** Setter for variable direction
+	 * @param direction - direction the object is pointing at
+	 */
+	void setDirection(Direction direction) {
+		this.direction = direction;
+	}
 	/** Getter for position on X axis
 	 * @return position on X axis
 	 */
@@ -190,4 +228,26 @@ public abstract class GameObject {
 		}
     }
 
+	/**
+	 * Method checking if Object is alive
+	 * @return alive bool
+	 */
+	public boolean isAlive() {
+		return alive;
+	}
+
+	/**
+	 * Setter that makes Object Dead
+	 */
+	public void setDead() {
+		this.alive = false;
+	}
+
+
+	/**
+	 * Setter that makes Object Alive
+	 */
+	public void setAlive() {
+		this.alive = true;
+	}
 }
