@@ -15,16 +15,25 @@
                           <font>
                               <Font size="48.0" />
                           </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                       </Button>
-                      <Button fx:id="steeringBTN" maxHeight="150.0" maxWidth="-Infinity" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="500.0" style="-fx-background-color: DARKRED; -fx-alignment: CENTER;" text="Steering" textAlignment="JUSTIFY" textFill="WHITE">
+                      <Button fx:id="steeringBTN" maxHeight="150.0" maxWidth="-Infinity" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="505.0" style="-fx-background-color: DARKRED; -fx-alignment: CENTER;" text="Steering" textAlignment="JUSTIFY" textFill="WHITE">
                           <font>
                               <Font size="48.0" />
                           </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Button>
-                      <Button fx:id="quitBTN" maxHeight="150.0" maxWidth="500.0" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="480.0" style="-fx-background-color: DARKRED; -fx-alignment: CENTER;" text="Quit" textAlignment="JUSTIFY" textFill="WHITE">
+                      <Button fx:id="quitBTN" maxHeight="150.0" maxWidth="500.0" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="470.0" style="-fx-background-color: DARKRED; -fx-alignment: CENTER;" text="Quit" textAlignment="JUSTIFY" textFill="WHITE">
                           <font>
                               <Font size="48.0" />
                           </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                       </Button>
                   </children>
               </VBox>

@@ -4,44 +4,40 @@ public class Enemy extends GameObject {
 
     private int moveCount;
 
-    public Enemy()
-    {
-        super(1,1,1,1);
+    public Enemy() {
+        super(0,0,1,1);
         moveCount = -11;
     }
 
-    public Enemy(int size, int posX, int posY)
-    {
+    public Enemy(int size, int posX, int posY) {
         super(posX, posY, size, size);
         moveCount = -11;
     }
 
-    public Bullet shoot()
-    {
-        return new Bullet(super.getSizeX()/3, super.getPosX(), super.getPosY(), Bullet.Origin.ENEMY);
+    public Bullet shoot() {
+        return new Bullet(super.getSizeX()/2, super.getPosX(), super.getPosY(), Bullet.Origin.ENEMY);
     }
 
     public void moveLeft()
     {
-        super.modifyPosX(-7);
+        super.modifyPosX(-10);
     }
 
     public void moveRight()
     {
-        super.modifyPosX(7);
+        super.modifyPosX(10);
     }
 
     public void moveDown()
     {
-        super.modifyPosY(3);
+        super.modifyPosY(5);
     }
 
     public int getMoveCount() {
         return moveCount;
     }
 
-    public void move()
-    {
+    public void move() {
         if(moveCount < 0) {
             moveRight();
             moveCount++;

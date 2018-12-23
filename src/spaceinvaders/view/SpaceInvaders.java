@@ -12,9 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import spaceinvaders.controller.AbstractController;
 import spaceinvaders.controller.ControllerGame;
-import spaceinvaders.model.Bullet;
-import spaceinvaders.model.GameObject;
-import spaceinvaders.model.SpaceGame;
+import spaceinvaders.model.*;
 
 import java.util.Optional;
 
@@ -48,8 +46,7 @@ public class SpaceInvaders extends Application {
         return myGame;
     }
 
-    public SpaceInvaders(int size)
-    {
+    public SpaceInvaders(int size) {
         //this.myGame = new SpaceGame(800,800);
 
         switch (size) {
@@ -108,8 +105,7 @@ public class SpaceInvaders extends Application {
         menuLoader.getFxmlController().setApplication(this);
     }
 
-    private void loadGame()
-    {
+    private void loadGame() {
         //Load game
         ViewLoader<BorderPane, ControllerGame> gameLoader =
                 new ViewLoader<>(path+"view.Game.fxml");
@@ -122,8 +118,7 @@ public class SpaceInvaders extends Application {
         gameLoader.getFxmlController().start();
     }
 
-    private Scene loadSteernig()
-    {
+    private Scene loadSteernig() {
         //Load menu
         ViewLoader<BorderPane, AbstractController> Loader =
                 new ViewLoader<>(path+"view.Steering.fxml");
@@ -160,40 +155,47 @@ public class SpaceInvaders extends Application {
             redrawBullet(gc, bullet);
         }
 
+        for (Rock rock: myGame.getRocks()) {
+            redrawRock(gc, rock);
+        }
 
-
-        for(int i = 0; i < 30; i++) {
-            if(myGame.getEnemy(i).isAlive()){
-                redrawEnemy(gc, myGame.getEnemy(i));
-            }
+        for (Enemy enemy: myGame.getEnemies()) {
+            redrawEnemy(gc, enemy);
         }
     }
 
-    private void redrawEnemy(GraphicsContext gc, GameObject enemy)
-    {
-        gc.setFill(Color.CYAN);
+    private void redrawEnemy(GraphicsContext gc, Enemy enemy) {
+        gc.setFill(Color.WHITE);
         gc.fillRect(enemy.getPosX()-enemy.getSizeX()/2.0, enemy.getPosY()-enemy.getSizeY()/2.0, enemy.getSizeX(), enemy.getSizeY());
-        gc.setLineWidth(myGame.getSizeX()/80.0);
-        gc.setStroke(Color.LIGHTBLUE);
-        gc.strokeRoundRect(enemy.getPosX()-enemy.getSizeX()/2.0, enemy.getPosY()-enemy.getSizeY()/2.0, enemy.getSizeX(), enemy.getSizeY(), 15, 15);
+        gc.setLineWidth(myGame.getSizeX()/200.0);
+        gc.setStroke(Color.LIGHTGREEN);
+        gc.strokeRoundRect(enemy.getPosX()-enemy.getSizeX()/2.0, enemy.getPosY()-enemy.getSizeY()/2.0, enemy.getSizeX(), enemy.getSizeY(), 10, 10);
     }
 
-    private void redrawPlayer(GraphicsContext gc, GameObject player)
-    {
-        double x,y;
-        gc.setLineWidth(myGame.getSizeX()/35.0);
-        gc.setStroke(Color.WHITE);
-/*
-        gc.strokePolyline(  new double[]{x+myGame.getSizeX()*8/175.0, x+myGame.getSizeX()*8/175.0, x, x+myGame.getSizeX()/12.5},
-                new double[]{y-myGame.getSizeY()/70.0, y, y, y },
-                4);
-*/
-        gc.strokeRect(player.getPosX()-player.getSizeX()/2.0, player.getPosY()-player.getSizeY()/2.0, player.getSizeX(), player.getSizeY());
+    private void redrawPlayer(GraphicsContext gc, Player player) {
+
+        gc.setLineWidth(myGame.getSizeX()/40.0);
+        gc.setStroke(Color.ORANGE);
+
+        //gc.strokePolyline(  new double[]{x+myGame.getSizeX()*8/175.0, x+myGame.getSizeX()*8/175.0, x, x+myGame.getSizeX()/12.5},
+         //       new double[]{y-myGame.getSizeY()/70.0, y, y, y },
+         //       4);
+        gc.strokeRect(player.getPosX()-player.getSizeX()/2.0, player.getPosY()+player.getSizeY()/2.0, player.getSizeX(), player.getSizeY());
     }
 
-    private void redrawBullet(GraphicsContext gc, GameObject bullet)
-    {
+    private void redrawBullet(GraphicsContext gc, Bullet bullet) {
         gc.setFill(Color.DARKRED);
-        gc.fillRoundRect(bullet.getPosX()-bullet.getSizeX()/2.0, bullet.getPosY()+bullet.getSizeY()/2.0, bullet.getSizeX()*5.0, bullet.getSizeY()*5.0, 15, 15);
+        if(bullet.isAlive())
+        {gc.setFill(Color.PINK);}
+        gc.fillRoundRect(bullet.getPosX()-bullet.getSizeX()/2.0, bullet.getPosY()+bullet.getSizeY()/2.0, bullet.getSizeX(), bullet.getSizeY(), 15, 15);
+    }
+
+    private void redrawRock(GraphicsContext gc, Rock rock){
+        if(rock.isDamaged()) {
+            gc.setFill(Color.ORANGE);
+        }else{
+            gc.setFill(Color.RED);
+        }
+        gc.fillRect(rock.getPosX()-rock.getSizeX()/2.0, rock.getPosY()+rock.getSizeY()/2.0, rock.getSizeX()*5.0, rock.getSizeY()*5.0);
     }
 }

@@ -51,8 +51,11 @@ public class ControllerGame extends AbstractController {
                     myGame.playerShoot();
                 }
                 break;
-            case Q:
+            case ESCAPE:
                 myGame.pause();
+                break;
+            case R:
+                myGame.restart();
                 break;
             default:
                 break;
@@ -70,11 +73,12 @@ public class ControllerGame extends AbstractController {
         last_update = 0;
         timer = new AnimationTimer(){
             public void handle(long now){
-                if(now - last_update >= 1000000)
+                if(now - last_update >= 500)
                 {
                     if(myGame.isPlay()) {
                         myGame.update();
                     }
+                    scoreLBL.setText("Score : "+myGame.getScore());
                     application.redrawGame(gameCanvas);
                     last_update = now;
                 }
