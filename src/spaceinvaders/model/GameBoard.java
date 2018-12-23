@@ -92,11 +92,11 @@ public abstract class GameBoard {
         play = false;
     }
     /**
-     * Method used to set the game state to play
+     * Method used to set the game state to won
      */
-    public void unPause() {
-        if(!gameover)
-            play = true;
+    public void won(){
+        play = false;
+        won = true;
     }
 
 }

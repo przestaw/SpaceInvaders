@@ -2,7 +2,9 @@ package spaceinvaders.model;
 
 import java.util.ArrayList;
 
-//TODO : Make Player move methods to avoid going out of range xd
+//TODO : Make class below a monitor
+//TODO : make out of bond for player
+//TODO : make 3 types of enemy
 
 public class SpaceGame extends GameBoard {
 
@@ -11,6 +13,7 @@ public class SpaceGame extends GameBoard {
     private ArrayList<Bullet> bullets;
     private ArrayList<Rock> rocks;
     private long movCount;
+    private long lastPlayerShoot;
     /**
      * Class Constructor
      * @param sizeX - height
@@ -44,6 +47,11 @@ public class SpaceGame extends GameBoard {
         bullets.clear();
         player.setDead();
         movCount = 0;
+        lastPlayerShoot = 0;
+    }
+
+    public void unPause(){
+        super.start();
     }
 
     private void scoreUp()
@@ -53,6 +61,7 @@ public class SpaceGame extends GameBoard {
 
     private void resetPlayer() {
         player.setAlive();
+        lastPlayerShoot = 0;
         player.setPosX(super.getSizeX()*11/24);
     }
 
@@ -68,26 +77,19 @@ public class SpaceGame extends GameBoard {
         for(int j = 0; j < 6; ++j) {
             for(int i = 0; i < 3; ++i) {
                 for(int k = 0; k < 2; ++k) {
-                    rocks.add(new Rock(super.getSizeX()/135, super.getSizeX()*(7+j*8+i*2)/60,super.getSizeY()*(23 + k)/30));
+                    rocks.add(new Rock(super.getSizeX()/26, super.getSizeX()*(7+j*8+i*2)/60,super.getSizeY()*(23 + k)/30));
                 }
             }
         }
     }
 
-    public void update() {
+    public synchronized void update() {
         //move player
         player.move(super.getSizeX()/400);
         //shoot by player - with shrinking intervals[if pressed]
-        if(player.isFireOn()){
-            player.incrementShootCounter();
-            if(player.getShootCounter() == 1){
-                bullets.add(player.shoot());
-            }else{
-                if(player.getShootCounter()%25 == 0)
-                    player.resetShootCounter();
-            }
-        }else{
-            player.resetShootCounter();
+        if(player.isFireOn() && (movCount - lastPlayerShoot > enemies.size()/2)){
+            bullets.add(player.shoot());
+            lastPlayerShoot = movCount;
         }
         //Check if anybody is dead
         for (Bullet bullet: bullets) {
@@ -138,7 +140,7 @@ public class SpaceGame extends GameBoard {
 
         //Enemy shoots
         for (Enemy enemy : enemies){
-            if(enemy.isAlive() && movCount%(2*enemies.size()) == 0 && Math.random() < 0) {
+            if(enemy.isAlive() && movCount%(2*enemies.size()) == 0 && Math.random() < 0.02) {
                 bullets.add(enemy.shoot());
             }
         }
@@ -172,14 +174,14 @@ public class SpaceGame extends GameBoard {
     public ArrayList<Enemy> getEnemies() { return enemies; }
 
     public ArrayList<Bullet> getBullets() { return bullets; }
-
+/*
     private boolean isInRange(GameObject one, GameObject two) {
         return((  (one.getPosX()-one.getSizeX()/2 <= two.getPosX()+two.getSizeX()/2)
                 &&(one.getPosX()+one.getSizeX()/2 >= two.getPosX()-two.getSizeX()/2))
                &&((one.getPosY()-one.getSizeY()/2 <= two.getPosY()+two.getSizeY()/2)
                 &&(one.getPosY()+one.getSizeY()/2 >= two.getPosY()-two.getSizeY()/2)));
     }
-/*
+*/
     private boolean isInRange(GameObject one, GameObject two) {
         if(   (one.getPosX()-one.getSizeX()/2 > two.getPosX()+two.getSizeX()/2)
             ||(one.getPosX()+one.getSizeX()/2 < two.getPosX()-two.getSizeX()/2)){
@@ -191,7 +193,7 @@ public class SpaceGame extends GameBoard {
             return true;
         }
     }
-    */
+
 }
 
 

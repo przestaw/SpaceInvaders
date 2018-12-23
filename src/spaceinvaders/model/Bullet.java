@@ -1,13 +1,11 @@
 package spaceinvaders.model;
 
-public class Bullet extends GameObject
-{
+public class Bullet extends GameObject {
     public enum Origin {ENEMY, PLAYER};
 
     private Origin origin;
 
-    public Bullet(int size, int posX, int posY, Origin origin)
-    {
+    public Bullet(int size, int posX, int posY, Origin origin) {
         super(posX, posY, size/2, size);
         this.origin = origin;
         switch(origin){
@@ -21,8 +19,7 @@ public class Bullet extends GameObject
         move();
     }
 
-    public Origin getOrigin()
-    {
+    public Origin getOrigin() {
         return origin;
     }
 }

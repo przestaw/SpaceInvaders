@@ -1,19 +1,14 @@
 package spaceinvaders.model;
 
-public class Player extends GameObject
-{
+public class Player extends GameObject implements Playable {
     private boolean leftPressed;
     private boolean rightPressed;
     private boolean fireOn;
-    private int shootCounter;
 
-    public Player(int sizeX, int sizeY)
-    {
+    public Player(int sizeX, int sizeY) {
         super(sizeX*11/24, sizeY*17/18, sizeX/20, sizeY/30);
         leftPressed = false;
         rightPressed = false;
-
-        shootCounter = 0;
     }
     
     public Bullet shoot(){ return new Bullet(super.getSizeX()/3, super.getPosX(), super.getPosY(), Bullet.Origin.PLAYER); }
@@ -31,12 +26,6 @@ public class Player extends GameObject
     public void setFireOn(){fireOn = true;}
 
     public boolean isFireOn(){return fireOn;}
-
-    public void resetShootCounter(){shootCounter = 0;}
-
-    public void incrementShootCounter(){shootCounter = shootCounter +1;}
-
-    public int getShootCounter(){return shootCounter;}
 
     private void updateDirection(){
         if(leftPressed == rightPressed){

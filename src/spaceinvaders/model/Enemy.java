@@ -1,6 +1,8 @@
 package spaceinvaders.model;
 
-public class Enemy extends GameObject {
+//TODO : make 3 types of enemy
+
+public class Enemy extends GameObject implements Playable{
 
     private int moveCount;
 
@@ -33,18 +35,14 @@ public class Enemy extends GameObject {
         super.modifyPosY(5);
     }
 
-    public int getMoveCount() {
-        return moveCount;
-    }
-
     public void move() {
         if(moveCount < 0) {
             moveRight();
             moveCount++;
-        } else if(moveCount == 0) {
+        }else if(moveCount == 0){
             moveDown();
             moveCount++;
-        } else if(moveCount < 12){
+        }else if(moveCount < 12){
             moveLeft();
             moveCount++;
         }else {

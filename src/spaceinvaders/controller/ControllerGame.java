@@ -33,8 +33,7 @@ public class ControllerGame extends AbstractController {
 
     @FXML
     private void keyTypedActionHandler(KeyEvent key) {
-        switch (key.getCode())
-        {
+        switch (key.getCode()) {
             case ENTER:
                 myGame.unPause();
                 break;
@@ -51,8 +50,7 @@ public class ControllerGame extends AbstractController {
 
     @FXML
     private void keyPressedActionHandler(KeyEvent key) {
-        switch (key.getCode())
-        {
+        switch (key.getCode()) {
             case A:
                 myGame.setLeftOn();
                 break;
@@ -75,8 +73,7 @@ public class ControllerGame extends AbstractController {
 
     @FXML
     private void keyRelasedActionHandler(KeyEvent key) {
-        switch (key.getCode())
-        {
+        switch (key.getCode()) {
             case A:
                 myGame.setLeftOff();
                 break;

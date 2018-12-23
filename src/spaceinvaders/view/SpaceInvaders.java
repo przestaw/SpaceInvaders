@@ -196,6 +196,6 @@ public class SpaceInvaders extends Application {
         }else{
             gc.setFill(Color.RED);
         }
-        gc.fillRect(rock.getPosX()-rock.getSizeX()/2.0, rock.getPosY()+rock.getSizeY()/2.0, rock.getSizeX()*5.0, rock.getSizeY()*5.0);
+        gc.fillRect(rock.getPosX()-rock.getSizeX()/2.0, rock.getPosY()+rock.getSizeY()/2.0, rock.getSizeX(), rock.getSizeY());
     }
 }
