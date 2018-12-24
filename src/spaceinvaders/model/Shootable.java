@@ -1,6 +1,6 @@
 package spaceinvaders.model;
 
-public interface Playable {
+public interface Shootable {
 
     Bullet shoot();
 

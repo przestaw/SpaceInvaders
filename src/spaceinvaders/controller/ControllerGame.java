@@ -98,7 +98,7 @@ public class ControllerGame extends AbstractController {
         last_update = 0;
         timer = new AnimationTimer(){
             public void handle(long now){
-                if(now - last_update >= 500) {
+                if(now - last_update >= 200) {
                     if(myGame.isPlay()) {
                         myGame.update();
                         gameMessage.setText("");

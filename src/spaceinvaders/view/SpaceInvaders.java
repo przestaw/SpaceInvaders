@@ -148,7 +148,6 @@ public class SpaceInvaders extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.web("#000020"));
         gc.fillRect(0,0,myGame.getSizeX(),myGame.getSizeY());
-
         redrawPlayer(gc, myGame.getPlayer()); //TODO -> error
 
         for (Bullet bullet: myGame.getBullets()) {
@@ -165,7 +164,17 @@ public class SpaceInvaders extends Application {
     }
 
     private void redrawEnemy(GraphicsContext gc, Enemy enemy) {
-        gc.setFill(Color.WHITE);
+        switch (enemy.getEnemyType()){
+            case angry:
+                gc.setFill(Color.GREEN);
+                break;
+            case bad:
+                gc.setFill(Color.YELLOW);
+                break;
+            case evil:
+                gc.setFill(Color.ORANGE);
+                break;
+        }
         gc.fillRect(enemy.getPosX()-enemy.getSizeX()/2.0, enemy.getPosY()-enemy.getSizeY()/2.0, enemy.getSizeX(), enemy.getSizeY());
         gc.setLineWidth(myGame.getSizeX()/200.0);
         gc.setStroke(Color.LIGHTGREEN);

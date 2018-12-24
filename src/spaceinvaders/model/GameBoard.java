@@ -1,10 +1,10 @@
 package spaceinvaders.model;
+
 /**
  * Class used to store and modify whole game state
  */
 
 public abstract class GameBoard {
-
     private int score;
 
     private final int sizeX;
@@ -98,5 +98,4 @@ public abstract class GameBoard {
         play = false;
         won = true;
     }
-
 }

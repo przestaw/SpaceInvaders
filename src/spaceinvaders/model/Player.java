@@ -1,6 +1,6 @@
 package spaceinvaders.model;
 
-public class Player extends GameObject implements Playable {
+public class Player extends GameObject implements Shootable {
     private boolean leftPressed;
     private boolean rightPressed;
     private boolean fireOn;

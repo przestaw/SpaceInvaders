@@ -6,7 +6,7 @@ import java.util.ArrayList;
 //TODO : make out of bond for player
 //TODO : make 3 types of enemy
 
-public class SpaceGame extends GameBoard {
+public class SpaceGame extends GameBoard implements Updatable{
 
     private Player player;
     private ArrayList<Enemy> enemies;
@@ -54,9 +54,21 @@ public class SpaceGame extends GameBoard {
         super.start();
     }
 
-    private void scoreUp()
+    private void scoreUp(Enemy.EnemyType type)
     {
-        super.setScore(super.getScore() + 5);
+        int add = 0;
+        switch (type){
+            case angry:
+                add = 5;
+                break;
+            case bad:
+                add = 10;
+                break;
+            case evil:
+                add = 20;
+                break;
+        }
+        super.setScore(super.getScore() + add);
     }
 
     private void resetPlayer() {
@@ -66,9 +78,24 @@ public class SpaceGame extends GameBoard {
     }
 
     private void createEnemy() {
-        for(int j = 0; j < 4; ++j) {
+        Enemy.EnemyType type;
+        for(int j = 0; j < 5; ++j) {
+            switch (j){
+                default:
+                case 0:
+                    type = Enemy.EnemyType.evil;
+                    break;
+                case 1:
+                case 2:
+                    type = Enemy.EnemyType.bad;
+                    break;
+                case 3:
+                case 4:
+                    type = Enemy.EnemyType.angry;
+                    break;
+            }
             for(int i = 0; i < 10; ++i) {
-                enemies.add(new Enemy(super.getSizeX()/30, (i+1)*super.getSizeX()/14, (1+j)*super.getSizeY()/14));
+                enemies.add(new Enemy(super.getSizeX()/30, (i+1)*super.getSizeX()/16, (1+j)*super.getSizeY()/16, type));
             }
         }
     }
@@ -77,23 +104,29 @@ public class SpaceGame extends GameBoard {
         for(int j = 0; j < 6; ++j) {
             for(int i = 0; i < 3; ++i) {
                 for(int k = 0; k < 2; ++k) {
-                    rocks.add(new Rock(super.getSizeX()/26, super.getSizeX()*(7+j*8+i*2)/60,super.getSizeY()*(23 + k)/30));
+                    rocks.add(new Rock(super.getSizeX()/39, super.getSizeX()*(8+j*12+i*2)/80,super.getSizeY()*(33 + k)/40));
                 }
             }
         }
     }
 
     public synchronized void update() {
+        Boolean gameover = false;
         //move player
         player.move(super.getSizeX()/400);
+
+        if(super.isWon()) {
+            return; //if we won the game there is nothing to do
+        }
         //shoot by player - with shrinking intervals[if pressed]
-        if(player.isFireOn() && (movCount - lastPlayerShoot > enemies.size()/2)){
+        if(player.isFireOn() && (movCount - lastPlayerShoot > enemies.size()/2 + 20)){
             bullets.add(player.shoot());
             lastPlayerShoot = movCount;
         }
+
         //Check if anybody is dead
         for (Bullet bullet: bullets) {
-            bullet.move();
+            bullet.move(super.getSizeX()/400);
             for (Rock rock: rocks) {
                 if(rock.isAlive()
                         && isInRange(bullet, rock))
@@ -111,7 +144,7 @@ public class SpaceGame extends GameBoard {
                             {
                                 enemy.setDead();
                                 bullet.setDead();
-                                scoreUp();
+                                scoreUp(enemy.getEnemyType());
                             }
                         }
                         break;
@@ -120,11 +153,18 @@ public class SpaceGame extends GameBoard {
                             player.setDead();
                             this.pause();
                             bullet.setDead();
-                            this.gameover();
+                            gameover = true;
                         }
                         break;
                 }
             }
+        }
+        if(enemies.size() == 0){
+            this.won();
+        }
+        if(gameover){
+            this.gameover(); //to avoid cocurrent modification and
+            return;
         }
         //Remove used bullets and rocks
         bullets.removeIf((Bullet b) -> !(b.isAlive()));
@@ -140,7 +180,7 @@ public class SpaceGame extends GameBoard {
 
         //Enemy shoots
         for (Enemy enemy : enemies){
-            if(enemy.isAlive() && movCount%(2*enemies.size()) == 0 && Math.random() < 0.02) {
+            if(enemy.isAlive() && movCount%(2*enemies.size()) == 0 && Math.random() < 0.05) {
                 bullets.add(enemy.shoot());
             }
         }
