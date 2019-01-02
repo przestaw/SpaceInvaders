@@ -1,15 +1,16 @@
 package spaceinvaders.model;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SpaceGame extends GameBoard implements Updatable{
-
     private Player player;
     private ArrayList<Enemy> enemies;
     private ArrayList<Bullet> bullets;
     private ArrayList<Rock> rocks;
     private long movCount;
     private long lastPlayerShoot;
+    private long lastEnemyShoot;
     /**
      * Class Constructor
      * @param sizeX - height
@@ -48,6 +49,7 @@ public class SpaceGame extends GameBoard implements Updatable{
         player.setDead();
         movCount = 0;
         lastPlayerShoot = 0;
+        lastEnemyShoot = 0;
     }
     /**
      * Method that resets game state to play
@@ -143,7 +145,9 @@ public class SpaceGame extends GameBoard implements Updatable{
     public synchronized void update() {
         boolean gameover = false;
         //move player
-        player.move(super.getSizeX()/300.0);
+        if(player.getPosY() > 0 || player.getPosY() < super.getSizeY()){
+            player.move(super.getSizeX()/(60.0 + enemies.size() * 4.0));
+        }
         if(super.isWon()) {
             return; //if we won the game there is nothing to do
         }
@@ -155,7 +159,7 @@ public class SpaceGame extends GameBoard implements Updatable{
 
         //Check if anybody is dead
         for (Bullet bullet: bullets) {
-            bullet.move(super.getSizeX()/180.0);
+            bullet.move(super.getSizeX()/(90.0 + enemies.size()*1.5));
             for (Rock rock: rocks) {
                 if(rock.isAlive()
                         && isInRange(bullet, rock))
@@ -208,9 +212,17 @@ public class SpaceGame extends GameBoard implements Updatable{
         bullets.removeIf((Bullet b) -> (b.getPosY() < 0));
 
         //Enemy shoots
+        /*
         for (Enemy enemy : enemies){
             if(enemy.isAlive() && movCount%(2*enemies.size()) == 0 && Math.random() < 0.04) {
                 bullets.add(enemy.shoot());
+            }
+        }
+        */
+        if(movCount - lastEnemyShoot > 1.5*enemies.size() + 15) {
+            lastEnemyShoot = movCount;
+            for(int i = enemies.size()/14 + 1; i > 0; i--) {
+                bullets.add(enemies.get(ThreadLocalRandom.current().nextInt(0, enemies.size())).shoot());
             }
         }
         //Enemy moves

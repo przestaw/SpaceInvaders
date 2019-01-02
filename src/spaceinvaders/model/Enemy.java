@@ -45,12 +45,14 @@ public class Enemy extends GameObject implements Shootable {
             moveCount++;
         }else if(moveCount == 0){
             setDirection(Direction.down);
+            steps = steps * 1.5;
             moveCount++;
         }else if(moveCount < 14){
             setDirection(Direction.left);
             moveCount++;
         }else {
             setDirection(Direction.down);
+            steps = steps * 1.5;
             moveCount= -13;
         }
         super.move(steps);
