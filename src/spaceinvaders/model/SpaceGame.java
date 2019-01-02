@@ -2,10 +2,6 @@ package spaceinvaders.model;
 
 import java.util.ArrayList;
 
-//TODO : Make class below a monitor
-//TODO : make out of bond for player
-//TODO : make 3 types of enemy
-
 public class SpaceGame extends GameBoard implements Updatable{
 
     private Player player;
@@ -28,7 +24,9 @@ public class SpaceGame extends GameBoard implements Updatable{
         createRocks();
         bullets = new ArrayList<Bullet>();
     }
-
+    /**
+     * Method used to handle restart
+     */
     public void restart() {
         super.start();
         movCount = 0;
@@ -40,7 +38,9 @@ public class SpaceGame extends GameBoard implements Updatable{
         resetPlayer();
         super.setScore(0);
     }
-
+    /**
+     * Method used to handle gameover
+     */
     @Override
     public void gameover() {
         super.gameover();
@@ -49,11 +49,16 @@ public class SpaceGame extends GameBoard implements Updatable{
         movCount = 0;
         lastPlayerShoot = 0;
     }
-
+    /**
+     * Method that resets game state to play
+     */
     public void unPause(){
         super.start();
     }
-
+    /**
+     * Updates the score depending on the killed enemy type
+     * @param type - killed enemy
+     */
     private void scoreUp(Enemy.EnemyType type)
     {
         int add = 0;
@@ -70,13 +75,34 @@ public class SpaceGame extends GameBoard implements Updatable{
         }
         super.setScore(super.getScore() + add);
     }
-
+    /**
+     * Utility function to check if two gameObjects overlap
+     * @param one - first gameObject
+     * @param two - second gameObject
+     * @return if 2 objects overlap
+     */
+    private boolean isInRange(GameObject one, GameObject two) {
+        if(   (one.getPosX()-one.getSizeX()/2 > two.getPosX()+two.getSizeX()/2)
+                ||(one.getPosX()+one.getSizeX()/2 < two.getPosX()-two.getSizeX()/2)){
+            return false;
+        } else if((one.getPosY()-one.getSizeY()/2 > two.getPosY()+two.getSizeY()/2)
+                ||(one.getPosY()+one.getSizeY()/2 < two.getPosY()-two.getSizeY()/2)){
+            return false;
+        } else{
+            return true;
+        }
+    }
+    /**
+     * Sets player to beginning state
+     */
     private void resetPlayer() {
         player.setAlive();
         lastPlayerShoot = 0;
         player.setPosX(super.getSizeX()*11/24);
     }
-
+    /**
+     * Creates all enemies
+     */
     private void createEnemy() {
         Enemy.EnemyType type;
         for(int j = 0; j < 5; ++j) {
@@ -99,7 +125,9 @@ public class SpaceGame extends GameBoard implements Updatable{
             }
         }
     }
-
+    /**
+     * Creates all rocks
+     */
     private void createRocks(){
         for(int j = 0; j < 6; ++j) {
             for(int i = 0; i < 3; ++i) {
@@ -109,24 +137,25 @@ public class SpaceGame extends GameBoard implements Updatable{
             }
         }
     }
-
+    /**
+     * Method used to update all game elements
+     */
     public synchronized void update() {
-        Boolean gameover = false;
+        boolean gameover = false;
         //move player
-        player.move(super.getSizeX()/400);
-
+        player.move(super.getSizeX()/300.0);
         if(super.isWon()) {
             return; //if we won the game there is nothing to do
         }
         //shoot by player - with shrinking intervals[if pressed]
-        if(player.isFireOn() && (movCount - lastPlayerShoot > enemies.size()/2 + 20)){
+        if(player.isFireOn() && (movCount - lastPlayerShoot > enemies.size()/2 + 15)){
             bullets.add(player.shoot());
             lastPlayerShoot = movCount;
         }
 
         //Check if anybody is dead
         for (Bullet bullet: bullets) {
-            bullet.move(super.getSizeX()/400);
+            bullet.move(super.getSizeX()/180.0);
             for (Rock rock: rocks) {
                 if(rock.isAlive()
                         && isInRange(bullet, rock))
@@ -180,60 +209,64 @@ public class SpaceGame extends GameBoard implements Updatable{
 
         //Enemy shoots
         for (Enemy enemy : enemies){
-            if(enemy.isAlive() && movCount%(2*enemies.size()) == 0 && Math.random() < 0.05) {
+            if(enemy.isAlive() && movCount%(2*enemies.size()) == 0 && Math.random() < 0.04) {
                 bullets.add(enemy.shoot());
             }
         }
         //Enemy moves
-        if(movCount%(enemies.size() + 15) == 0) {
+        if(movCount%(enemies.size() + 10) == 0) {
             for (Enemy enemy : enemies) {
-                enemy.move();
+                enemy.move(super.getSizeX()/40.0);
             }
         }
         movCount++;
     }
-
+    /**
+     * Getter for the Player
+     * @return player
+     */
     public Player getPlayer(){
         return player;
     }
-
+    /**
+     * Used to set button left off
+     */
     public void setLeftOff(){player.setLeftOff();}
-
+    /**
+     * Used to set button right off
+     */
     public void setRightOff(){player.setRightOff();}
-
+    /**
+     * Used to set button fire off
+     */
     public void setFireOff(){player.setFireOff();}
-
+    /**
+     * Used to set button left on
+     */
     public void setLeftOn(){player.setLeftOn();}
-
+    /**
+     * Used to set button right on
+     */
     public void setRightOn(){player.setRightOn();}
-
+    /**
+     * Used to set button fire on
+     */
     public void setFireOn(){player.setFireOn();}
-
+    /**
+     * Getter for all rocks
+     * @return rocks arrayList
+     */
     public ArrayList<Rock>  getRocks() { return rocks; }
-
+    /**
+     * Getter for all rocks
+     * @return rocks arrayList
+     */
     public ArrayList<Enemy> getEnemies() { return enemies; }
-
+    /**
+     * Getter for all bullets
+     * @return bullets arrayList
+     */
     public ArrayList<Bullet> getBullets() { return bullets; }
-/*
-    private boolean isInRange(GameObject one, GameObject two) {
-        return((  (one.getPosX()-one.getSizeX()/2 <= two.getPosX()+two.getSizeX()/2)
-                &&(one.getPosX()+one.getSizeX()/2 >= two.getPosX()-two.getSizeX()/2))
-               &&((one.getPosY()-one.getSizeY()/2 <= two.getPosY()+two.getSizeY()/2)
-                &&(one.getPosY()+one.getSizeY()/2 >= two.getPosY()-two.getSizeY()/2)));
-    }
-*/
-    private boolean isInRange(GameObject one, GameObject two) {
-        if(   (one.getPosX()-one.getSizeX()/2 > two.getPosX()+two.getSizeX()/2)
-            ||(one.getPosX()+one.getSizeX()/2 < two.getPosX()-two.getSizeX()/2)){
-            return false;
-        } else if((one.getPosY()-one.getSizeY()/2 > two.getPosY()+two.getSizeY()/2)
-                ||(one.getPosY()+one.getSizeY()/2 < two.getPosY()-two.getSizeY()/2)){
-            return false;
-        } else{
-            return true;
-        }
-    }
-
 }
 
 

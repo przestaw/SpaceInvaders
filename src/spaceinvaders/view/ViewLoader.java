@@ -7,11 +7,9 @@ import java.io.IOException;
 /**
  * Class used to load Interface from FXML files
  */
-
 public class ViewLoader<T,U> {
     private T fxmlLayout;
     private U fxmlController;
-
 	/**
 	 * Class constructor
 	 * @param fxml - path to FXML file

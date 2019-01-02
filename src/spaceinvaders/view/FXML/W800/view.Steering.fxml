@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="850.0" prefWidth="800.0" style="-fx-background-color: #000020" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceinvaders.controller.ControllerSteering">
    <top>
@@ -83,6 +83,67 @@
             <Text fill="WHITE" layoutX="628.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
                <font>
                   <Font size="45.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="60.0" layoutX="617.0" layoutY="95.0" stroke="WHITE" strokeType="INSIDE" width="60.0">
+               <fill>
+                  <LinearGradient endX="1.0" startY="1.0">
+                     <stops>
+                        <Stop color="#ffed00" offset="0.04259259259259259" />
+                        <Stop color="RED" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Text fill="WHITE" layoutX="608.0" layoutY="190.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="634.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R" wrappingWidth="26.91650390625">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="60.0" layoutX="140.0" layoutY="95.0" stroke="WHITE" strokeType="INSIDE" width="60.0">
+               <fill>
+                  <LinearGradient endX="1.0" startY="1.0">
+                     <stops>
+                        <Stop color="RED" offset="0.04259259259259259" />
+                        <Stop color="#ffed00" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Text fill="WHITE" layoutX="139.0" layoutY="185.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pause">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="147.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esc">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="60.0" layoutX="380.0" layoutY="100.0" stroke="WHITE" strokeType="INSIDE" width="60.0">
+               <fill>
+                  <LinearGradient endX="0.8866300366300366" endY="0.25856227106227103" startX="0.1644688644688645" startY="1.0">
+                     <stops>
+                        <Stop color="#8000ff" offset="0.1962962962962963" />
+                        <Stop color="#ff007c" offset="0.48888888888888893" />
+                        <Stop color="RED" offset="0.8592592592592593" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Text fill="WHITE" layoutX="382.0" layoutY="138.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="337.0" layoutY="193.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Start/UnPause">
+               <font>
+                  <Font size="24.0" />
                </font>
             </Text>
          </children>

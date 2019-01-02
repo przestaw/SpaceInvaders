@@ -57,7 +57,7 @@ public class ControllerGame extends AbstractController {
             case D:
                 myGame.setRightOn();
                 break;
-            case W :
+            case W:
                 myGame.setFireOn();
                 break;
             case ESCAPE:
@@ -93,17 +93,17 @@ public class ControllerGame extends AbstractController {
     @FXML
     private void initialize() {
         resetBTN.setOnAction(e -> { myGame.restart(); });
-
         returnBTN.setOnAction(e -> { application.runMenu(); });
+
         last_update = 0;
         timer = new AnimationTimer(){
             public void handle(long now){
-                if(now - last_update >= 200) {
+                if(now - last_update >= 210) {
                     if(myGame.isPlay()) {
                         myGame.update();
                         gameMessage.setText("");
                     }else if(myGame.isWon()) {
-                        gameMessage.setText("Congratulations\nYou WON!");
+                        gameMessage.setText("Congratulations\nYou saved the Earth!");
                     }else if(myGame.isGameover()){
                         gameMessage.setText("You have lost...\nInvaders has taken down Earth");
                     }else{
@@ -116,15 +116,16 @@ public class ControllerGame extends AbstractController {
             }
         };
     }
-
+    /**
+     * Setter for the myGame SpaceGame reference
+     * @param game - game to set
+     */
     public void setMyGame(SpaceGame game) {
         myGame = game;
     }
-
-    public Canvas getGameCanvas() {
-        return gameCanvas;
-    }
-
+    /**
+     * Used to start game timer when everything will be ready
+     */
     public void start() {
         timer.start();
     }

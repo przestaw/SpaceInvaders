@@ -3,7 +3,7 @@ package spaceinvaders.model;
 //TODO : make 3 types of enemy
 
 public class Enemy extends GameObject implements Shootable {
-    private int moveCount;
+    private double moveCount;
 
     public enum EnemyType{angry, bad, evil}
     private EnemyType enemyType;
@@ -14,13 +14,13 @@ public class Enemy extends GameObject implements Shootable {
         this.enemyType = EnemyType.angry;
     }
 
-    public Enemy(int size, int posX, int posY) {
+    public Enemy(double size, double posX, double posY) {
         super(posX, posY, size, size);
         moveCount = -11;
         this.enemyType = EnemyType.angry;
     }
 
-    public Enemy(int size, int posX, int posY, EnemyType enemyType) {
+    public Enemy(double size, double posX, double posY, EnemyType enemyType) {
         super(posX, posY, size, size);
         moveCount = -11;
         this.enemyType = enemyType;
@@ -29,39 +29,37 @@ public class Enemy extends GameObject implements Shootable {
     public EnemyType getEnemyType() {
         return enemyType;
     }
-
-    public Bullet shoot() {
-        return new Bullet(super.getSizeX()/2, super.getPosX(), super.getPosY(), Bullet.Origin.ENEMY);
-    }
-
-    public void moveLeft()
-    {
-        super.modifyPosX(-20);
-    }
-
-    public void moveRight()
-    {
-        super.modifyPosX(20);
-    }
-
-    public void moveDown()
-    {
-        super.modifyPosY(20);
-    }
-
-    public void move() {
+    /**
+     * Method used to fire a bullet from enemy
+     * @return shoot bullet
+     */
+    public Bullet shoot() { return new Bullet(super.getSizeX()/2.0, super.getPosX(), super.getPosY(), Bullet.Origin.ENEMY); }
+    /**
+     * Method used to move enemy
+     * @param steps how many steps to move
+     */
+    @Override
+    public void move(double steps) {
         if(moveCount < 0) {
-            moveRight();
+            setDirection(Direction.right);
             moveCount++;
         }else if(moveCount == 0){
-            moveDown();
+            setDirection(Direction.down);
             moveCount++;
-        }else if(moveCount < 13){
-            moveLeft();
+        }else if(moveCount < 14){
+            setDirection(Direction.left);
             moveCount++;
         }else {
-            moveDown();
+            setDirection(Direction.down);
             moveCount= -13;
         }
+        super.move(steps);
+    }
+    /**
+     * Method used to move enemy by 1 step
+     */
+    @Override
+    public void move() {
+        this.move(1);
     }
 }

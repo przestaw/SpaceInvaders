@@ -5,7 +5,7 @@ public class Bullet extends GameObject {
 
     private Origin origin;
 
-    public Bullet(int size, int posX, int posY, Origin origin) {
+    public Bullet(double size, double posX, double posY, Origin origin) {
         super(posX, posY, size/2, size);
         this.origin = origin;
         switch(origin){
