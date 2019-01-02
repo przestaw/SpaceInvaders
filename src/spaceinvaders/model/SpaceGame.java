@@ -143,7 +143,9 @@ public class SpaceGame extends GameBoard implements Updatable{
     public synchronized void update() {
         boolean gameover = false;
         //move player
-        player.move(super.getSizeX()/300.0);
+        if(player.getPosY() > 0 || player.getPosY() < super.getSizeY()){
+            player.move(super.getSizeX()/(60.0 + enemies.size() * 4.0));
+        }
         if(super.isWon()) {
             return; //if we won the game there is nothing to do
         }
@@ -155,7 +157,7 @@ public class SpaceGame extends GameBoard implements Updatable{
 
         //Check if anybody is dead
         for (Bullet bullet: bullets) {
-            bullet.move(super.getSizeX()/180.0);
+            bullet.move(super.getSizeX()/(90.0 + enemies.size()*1.5));
             for (Rock rock: rocks) {
                 if(rock.isAlive()
                         && isInRange(bullet, rock))
