@@ -49,7 +49,7 @@ public class SpaceGame extends GameBoard implements Updatable{
         player.setDead();
         movCount = 0;
         lastPlayerShoot = 0;
-        lastEnemyShoot = 0;
+        lastEnemyShoot = 20;
     }
     /**
      * Method that resets game state to play
@@ -212,21 +212,14 @@ public class SpaceGame extends GameBoard implements Updatable{
         bullets.removeIf((Bullet b) -> (b.getPosY() < 0));
 
         //Enemy shoots
-        /*
-        for (Enemy enemy : enemies){
-            if(enemy.isAlive() && movCount%(2*enemies.size()) == 0 && Math.random() < 0.04) {
-                bullets.add(enemy.shoot());
-            }
-        }
-        */
-        if(movCount - lastEnemyShoot > 1.5*enemies.size() + 15) {
+        if(movCount - lastEnemyShoot > 1.5*enemies.size()) {///
             lastEnemyShoot = movCount;
-            for(int i = enemies.size()/14 + 1; i > 0; i--) {
+            for(int i = enemies.size()/12 + 1; i > 0; i--) {///
                 bullets.add(enemies.get(ThreadLocalRandom.current().nextInt(0, enemies.size())).shoot());
             }
         }
         //Enemy moves
-        if(movCount%(enemies.size() + 10) == 0) {
+        if(movCount%(enemies.size() + 15) == 0) {
             for (Enemy enemy : enemies) {
                 enemy.move(super.getSizeX()/40.0);
             }

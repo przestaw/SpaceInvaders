@@ -110,7 +110,7 @@ public class ControllerGame extends AbstractController {
                         gameMessage.setText("PAUSE");
                     }
                     scoreLBL.setText("Score : "+myGame.getScore());
-                    application.redrawGame(gameCanvas);
+                    application.callRedrawGame(gameCanvas);
                     last_update = now;
                 }
             }
